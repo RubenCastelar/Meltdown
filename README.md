@@ -1,9 +1,5 @@
 # 🧠 Meltdown Vulnerability Research & Proof of Concept
 
-<p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Meltdown_Spectre_Logo.svg" alt="Meltdown Logo" width="300"/>
-</p>
-
 ## 📖 Descripción
 
 Este repositorio contiene un análisis técnico detallado, así como una prueba de concepto (PoC) de la vulnerabilidad **Meltdown (CVE-2017-5754)**, la cual afecta a múltiples microprocesadores modernos. Esta vulnerabilidad permite que un proceso en espacio de usuario acceda a memoria privilegiada del kernel aprovechando la ejecución especulativa y canales laterales basados en caché.
