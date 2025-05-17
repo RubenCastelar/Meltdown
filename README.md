@@ -1,32 +1,36 @@
-# 🧠 Investigación sobre la Vulnerabilidad Meltdown y Prueba de Concepto
+# CVE-2017-5754 (Meltdown) - Análisis y Explotación
 
-## 📖 Descripción
-
-Este repositorio contiene un análisis técnico detallado, así como una prueba de concepto (PoC) de la vulnerabilidad **Meltdown (CVE-2017-5754)**, la cual afecta a múltiples microprocesadores modernos. Esta vulnerabilidad permite que un proceso en espacio de usuario acceda a memoria privilegiada del kernel aprovechando la ejecución especulativa y canales laterales basados en caché.
-
-> ⚠️ Este proyecto es únicamente con fines educativos y de investigación. No está destinado para usos maliciosos.
+Este repositorio contiene el código fuente para demostrar la explotación de la vulnerabilidad **CVE-2017-5754**, conocida como **Meltdown**. Esta falla afecta a múltiples procesadores Intel y permite a procesos en espacio de usuario leer **memoria privilegiada del kernel** aprovechando la ejecución especulativa.
 
 ---
 
-## 🧠 ¿Qué es Meltdown?
+## ⚠️ Advertencia
 
-**Meltdown** es una vulnerabilidad crítica descubierta en 2017 que rompe el aislamiento entre aplicaciones y el sistema operativo. Permite que procesos sin privilegios lean arbitrariamente memoria del kernel utilizando un canal lateral basado en el comportamiento de la **caché de CPU**.
-
-### 🔍 Cómo funciona
-
-1. **Lectura especulativa de direcciones privilegiadas**.
-2. **Uso del valor especulativo como índice para cargar en caché un array controlado por el atacante**.
-3. **Medición del tiempo de acceso (Flush+Reload)** para determinar el valor leído.
-4. **Extracción de datos sensibles**, como contraseñas o claves de cifrado.
-
-### 🔐 Mitigaciones
-
-- KPTI (Kernel Page Table Isolation)
-- Retpoline (para Spectre)
-- Microcode updates por parte de Intel/AMD
-- Actualizaciones del kernel y herramientas de detección
+Este código se proporciona únicamente con **fines educativos y de investigación en ciberseguridad**. **No debe usarse en sistemas en producción ni sin autorización expresa**. El uso indebido puede ser ilegal y va en contra de los términos de uso del autor.
 
 ---
 
-## 🧪 Estructura del proyecto
+## 🧠 Descripción técnica
 
+Meltdown aprovecha una característica de los procesadores modernos llamada **ejecución especulativa**, que intenta predecir y ejecutar instrucciones antes de que se confirme si son válidas.
+
+La vulnerabilidad permite que, aunque una instrucción falle por acceso a memoria privilegiada, las instrucciones especulativas posteriores se ejecuten temporalmente. Si en esa ejecución se accede a memoria protegida, se puede filtrar su contenido mediante efectos colaterales en la **caché del procesador**.
+
+Esto permite que un proceso sin privilegios lea datos sensibles como:
+
+- Contraseñas almacenadas en memoria del kernel.
+- Llaves criptográficas.
+- Cualquier información que resida en el espacio de direcciones privilegiado.
+
+---
+
+## 📁 Archivos del repositorio
+
+- `meltdown.c`: Código fuente del exploit que lee memoria del kernel usando ejecución especulativa y análisis de tiempos de acceso a la caché.
+
+---
+
+## 🛠️ Compilación
+
+```bash
+gcc -O2 -o meltdown meltdown.c
