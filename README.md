@@ -27,6 +27,9 @@ Esto permite que un proceso sin privilegios lea datos sensibles como:
 ## 📁 Archivos del repositorio
 
 - `meltdown.c`: Código fuente del exploit que lee memoria del kernel usando ejecución especulativa y análisis de tiempos de acceso a la caché.
+- Se le deben pasar dos parámetros:
+    - Dirección física a partir de la cual se va a realizar la explotación.
+    - Número de bytes que se desea leer.
 
 ---
 
