@@ -33,4 +33,4 @@ Esto permite que un proceso sin privilegios lea datos sensibles como:
 ## 🛠️ Compilación
 
 ```bash
-gcc -O2 -o meltdown meltdown.c
+gcc -o meltdown meltdown.c
