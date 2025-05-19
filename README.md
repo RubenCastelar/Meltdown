@@ -12,7 +12,7 @@ Este código se proporciona únicamente con **fines educativos y de investigaci�
 
 ## 🧠 Descripción técnica
 
-Meltdown aprovecha una característica de los procesadores modernos llamada **ejecución especulativa**, que intenta predecir y ejecutar instrucciones antes de que se confirme si son válidas.
+Meltdown aprovecha una característica de los procesadores modernos llamada **ejecución especulativa**, que intenta predecir y ejecutar instrucciones, antes de que se confirme si son válidas.
 
 La vulnerabilidad permite que, aunque una instrucción falle por acceso a memoria privilegiada, las instrucciones especulativas posteriores se ejecuten temporalmente. Si en esa ejecución se accede a memoria protegida, se puede filtrar su contenido mediante efectos colaterales en la **caché del procesador**.
 
